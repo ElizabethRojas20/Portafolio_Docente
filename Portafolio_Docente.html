@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elizabeth Rojas Miranda — Física & Voz</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B0E1A;
+    --surface:#141A2E;
+    --surface-2:#1B2340;
+    --text:#EDEFF5;
+    --muted:#97A0B8;
+    --violet:#8C7CF0;
+    --violet-soft:#8C7CF033;
+    --amber:#E8B860;
+    --amber-soft:#E8B86033;
+    --line:rgba(255,255,255,.08);
+    --radius:14px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Space Grotesk', sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+  }
+  h1,h2,h3{font-family:'Fraunces', serif; font-weight:600; margin:0;}
+  a{color:inherit;}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 24px;}
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.78rem;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--amber);
+  }
+  section{padding:96px 0;}
+  @media (max-width:700px){ section{padding:64px 0;} }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(11,14,26,.85);
+    backdrop-filter: blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  nav.wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:64px;
+  }
+  .brand{font-family:'Fraunces', serif; font-weight:600; font-size:1.05rem;}
+  .brand span{color:var(--amber);}
+  .navlinks{display:flex; gap:28px; list-style:none; margin:0; padding:0;}
+  .navlinks a{
+    font-size:.9rem; text-decoration:none; color:var(--muted);
+    transition:color .2s;
+  }
+  .navlinks a:hover, .navlinks a:focus-visible{color:var(--text);}
+  .navtoggle{display:none; background:none; border:1px solid var(--line); color:var(--text); border-radius:8px; padding:8px 10px; cursor:pointer;}
+  @media (max-width:800px){
+    .navlinks{
+      position:absolute; top:64px; left:0; right:0;
+      background:var(--surface); flex-direction:column; gap:0;
+      padding:8px 24px 20px; border-bottom:1px solid var(--line);
+      display:none;
+    }
+    .navlinks.open{display:flex;}
+    .navlinks a{padding:12px 0; border-bottom:1px solid var(--line);}
+    .navtoggle{display:block;}
+  }
+
+  /* ---------- WAVE (signature element) ---------- */
+  .wave-divider{display:block; width:100%; height:auto;}
+  .wave-divider path{ stroke-linecap:round; fill:none; }
+
+  /* ---------- HERO ---------- */
+  .hero{padding-top:72px; padding-bottom:40px; position:relative; overflow:hidden;}
+  .hero .wrap{position:relative; z-index:2;}
+  .hero h1{
+    font-size:clamp(2.2rem, 5vw, 3.6rem);
+    line-height:1.08;
+    margin:18px 0 20px;
+    max-width:820px;
+  }
+  .hero h1 em{font-style:italic; color:var(--violet);}
+  .hero p.lede{
+    max-width:560px; color:var(--muted); font-size:1.05rem;
+  }
+  .hero-meta{
+    display:flex; flex-wrap:wrap; gap:10px 22px; margin-top:28px;
+    font-family:'IBM Plex Mono', monospace; font-size:.8rem; color:var(--muted);
+  }
+  .hero-meta b{color:var(--text); font-weight:500;}
+  .hero-wave-wrap{margin-top:48px;}
+
+  /* ---------- SECTION HEADS ---------- */
+  .sec-head{max-width:640px; margin-bottom:48px;}
+  .sec-head h2{font-size:clamp(1.7rem, 3.4vw, 2.3rem); margin-top:10px;}
+  .sec-head p{color:var(--muted); margin-top:14px;}
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{
+    display:grid; grid-template-columns: 1.3fr 1fr; gap:56px; align-items:start;
+  }
+  @media (max-width:800px){ .about-grid{grid-template-columns:1fr;} }
+  .about-grid p{color:var(--muted); margin:0 0 16px;}
+  .about-grid strong{color:var(--text);}
+  blockquote{
+    margin:28px 0 0; padding:20px 24px;
+    border-left:2px solid var(--amber);
+    font-family:'Fraunces', serif; font-style:italic; font-size:1.15rem;
+    color:var(--text);
+  }
+  .stats{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+  .stat{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+    padding:20px;
+  }
+  .stat .n{font-family:'Fraunces', serif; font-size:2rem; color:var(--violet);}
+  .stat .l{font-size:.82rem; color:var(--muted); margin-top:4px;}
+  .tagrow{display:flex; flex-wrap:wrap; gap:8px; margin-top:20px;}
+  .tag{
+    font-family:'IBM Plex Mono', monospace; font-size:.72rem;
+    padding:5px 10px; border-radius:999px;
+    border:1px solid var(--line); color:var(--muted);
+  }
+
+  /* ---------- CARDS (proyectos / metodologías / trabajos) ---------- */
+  .card-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:22px;}
+  @media (max-width:800px){ .card-grid{grid-template-columns:1fr;} }
+  .card{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+    padding:26px; opacity:0; transform:translateY(16px);
+    transition:opacity .6s ease, transform .6s ease;
+  }
+  .card.in{opacity:1; transform:none;}
+  .status{
+    font-family:'IBM Plex Mono', monospace; font-size:.72rem;
+    display:inline-flex; align-items:center; gap:6px; margin-bottom:14px;
+    color:var(--muted);
+  }
+  .status .dot{width:7px; height:7px; border-radius:50%; background:var(--muted);}
+  .status.active .dot{background:var(--amber);}
+  .status.active{color:var(--amber);}
+  .status.pending .dot{background:var(--violet);}
+  .status.pending{color:var(--violet);}
+  .card h3{font-size:1.15rem; margin-bottom:10px;}
+  .card p{color:var(--muted); font-size:.94rem; margin:0 0 14px;}
+  .card .tagrow{margin-top:0;}
+  .card a.link{
+    display:inline-block; margin-top:14px; font-size:.86rem; color:var(--amber);
+    text-decoration:none; border-bottom:1px solid transparent;
+  }
+  .card a.link:hover{border-color:var(--amber);}
+
+  /* ---------- RECURSOS ---------- */
+  .res-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  @media (max-width:900px){ .res-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:600px){ .res-grid{grid-template-columns:1fr;} }
+  .res-card{
+    background:var(--surface-2); border:1px solid var(--line); border-radius:var(--radius);
+    padding:22px;
+  }
+  .res-card .icon{font-size:1.5rem;}
+  .res-card h3{font-size:1rem; margin:10px 0 8px;}
+  .res-card p{color:var(--muted); font-size:.88rem; margin:0;}
+  .res-card a{font-size:.82rem; color:var(--violet); text-decoration:none; display:inline-block; margin-top:10px;}
+  .res-card a:hover{text-decoration:underline;}
+
+  /* ---------- METODOLOGIAS ---------- */
+  .method-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+    padding:28px;
+  }
+  .method-card h3{font-size:1.2rem; margin-bottom:6px;}
+  .method-card .sub{color:var(--muted); font-size:.85rem; margin-bottom:16px;}
+  .method-card ul{margin:0; padding-left:20px; color:var(--muted); font-size:.92rem;}
+  .method-card li{margin-bottom:8px;}
+  .method-card li b{color:var(--text);}
+
+  /* ---------- TIC TABLE ---------- */
+  table.tic{
+    width:100%; border-collapse:collapse; font-size:.9rem;
+    background:var(--surface); border-radius:var(--radius); overflow:hidden;
+  }
+  table.tic th, table.tic td{
+    padding:14px 16px; text-align:left; border-bottom:1px solid var(--line);
+  }
+  table.tic th{
+    font-family:'IBM Plex Mono', monospace; font-size:.72rem; letter-spacing:.06em;
+    text-transform:uppercase; color:var(--muted); font-weight:500;
+  }
+  table.tic td:first-child{color:var(--text); font-weight:500;}
+  table.tic tr:last-child td{border-bottom:none;}
+  .cat{
+    display:inline-block; font-family:'IBM Plex Mono', monospace; font-size:.7rem;
+    padding:3px 9px; border-radius:999px; border:1px solid var(--line); color:var(--muted);
+  }
+  .tic-scroll{overflow-x:auto;}
+
+  /* ---------- CONTACT / FOOTER ---------- */
+  footer{padding:72px 0 48px; border-top:1px solid var(--line);}
+  .footer-grid{display:flex; flex-wrap:wrap; justify-content:space-between; gap:32px; align-items:flex-end;}
+  footer h2{font-size:clamp(1.6rem,3vw,2.1rem);}
+  .footer-meta{color:var(--muted); font-size:.88rem;}
+  .footer-meta a{color:var(--amber); text-decoration:none;}
+  .footer-meta a:hover{text-decoration:underline;}
+  .copyright{margin-top:40px; font-size:.78rem; color:var(--muted); font-family:'IBM Plex Mono', monospace;}
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <div class="brand">Elizabeth <span>Rojas</span></div>
+    <button class="navtoggle" id="navToggle" aria-label="Abrir menú">☰</button>
+    <ul class="navlinks" id="navLinks">
+      <li><a href="#sobre-mi">Sobre mí</a></li>
+      <li><a href="#proyectos">Proyectos</a></li>
+      <li><a href="#metodologias">Metodologías</a></li>
+      <li><a href="#recursos">Recursos</a></li>
+      <li><a href="#tic">TIC</a></li>
+      <li><a href="#trabajos">Trabajos</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Física · UNMSM · Canto lírico</p>
+    <h1>De los agujeros negros <em>primordiales</em><br>a la afinación de una nota musical.</h1>
+    <p class="lede">Soy Elizabeth Grace Rojas Miranda, estudiante de Física en la UNMSM. Estoy interesada en analizar agujeros negros primordiales como candidatos a materia oscura, también disfruto programando en Python para analizar distintas bases de datos. Comparto mis conocimientos enseñando física y canto lírico — dos formas distintas de trabajar con ondas.</p>
+    <div class="hero-meta">
+      <span><b>7.° ciclo</b> · Física UNMSM</span>
+      <span><b>13.°</b> puesto · MFP Campinas</span>
+      <span><b>ES</b> nativo · <b>EN</b> B2 · <b>DE</b> básico</span>
+    </div>
+  </div>
+  <div class="hero-wave-wrap">
+    <svg class="wave-divider" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,60 C60,30 120,90 180,60 C240,30 300,90 360,60 C420,30 480,90 540,60
+               C580,55 610,50 630,35 C650,20 665,70 685,25 C700,-8 715,55 730,10
+               C742,-20 752,40 762,-5 C772,-30 780,15 790,-10 C800,-30 806,5 812,-15"
+            stroke="url(#waveGrad)" stroke-width="2.5"/>
+      <defs>
+        <linearGradient id="waveGrad" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#8C7CF0"/>
+          <stop offset="55%" stop-color="#8C7CF0"/>
+          <stop offset="100%" stop-color="#E8B860"/>
+        </linearGradient>
+      </defs>
+    </svg>
+  </div>
+</section>
+
+<!-- ================= SOBRE MI ================= -->
+<section id="sobre-mi">
+  <div class="wrap about-grid">
+    <div>
+      <p class="eyebrow">Sobre mí</p>
+      <h2 style="margin-top:10px;">Perfil académico</h2>
+      <p>Curso el <strong>7.° ciclo</strong> de la Escuela Profesional de Física en la <strong>Universidad Nacional Mayor de San Marcos (UNMSM)</strong>, Lima, Perú. Mi interés está en el análisis de datos y la cosmología, en particular en el estudio de <strong>agujeros negros primordiales</strong> como posibles candidatos a materia oscura.</p>
+      <p>Me gusta programar en <strong>Python</strong> para procesar y visualizar datos, y llevar esa misma curiosidad metódica a otros terrenos: fuera de la física, canto <strong>canto lírico</strong>; disfruto pensar la voz también como una onda que se puede estudiar y afinar.</p>
+      <blockquote>"Enfrentar al mundo y sus dificultades con una sonrisa: ahí está mi verdadera fortaleza."</blockquote>
+      <div class="tagrow">
+        <span class="tag">Cosmología</span>
+        <span class="tag">Agujeros negros primordiales</span>
+        <span class="tag">Materia oscura</span>
+        <span class="tag">Python</span>
+        <span class="tag">Análisis de datos</span>
+        <span class="tag">Canto lírico</span>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="n">7.°</div><div class="l">Ciclo académico</div></div>
+      <div class="stat"><div class="n">13.°</div><div class="l">Puesto — MFP Campinas</div></div>
+      <div class="stat"><div class="n">3</div><div class="l">Idiomas (ES · EN B2 · DE básico)</div></div>
+      <div class="stat"><div class="n">1</div><div class="l">Proyecto de investigación activo</div></div>
+    </div>
+  </div>
+</section>
+
+<svg class="wave-divider" viewBox="0 0 1200 60" preserveAspectRatio="none" aria-hidden="true" style="opacity:.5;">
+  <path d="M0,30 C100,10 200,50 300,30 C400,10 500,50 600,30 C650,25 680,15 700,30 C715,42 725,8 735,25 C742,10 748,32 754,18" stroke="#8C7CF0" stroke-width="1.5"/>
+</svg>
+
+<!-- ================= PROYECTOS ================= -->
+<section id="proyectos">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Investigación</p>
+      <h2>Proyectos en curso</h2>
+      <p>Dos frentes activos ahora mismo: modelamiento cosmológico y competencia matemática internacional.</p>
+    </div>
+    <div class="card-grid">
+      <div class="card">
+        <span class="status active"><span class="dot"></span>En curso</span>
+        <h3>Universos Cíclicos — Proyecto Sprint</h3>
+        <p>Investigación en Derivate dentro del proyecto Sprint, donde modelo la evolución de universos cíclicos aplicando programación para simular su comportamiento a lo largo de sucesivas fases cosmológicas.</p>
+        <div class="tagrow">
+          <span class="tag">Cosmología</span>
+          <span class="tag">Python</span>
+          <span class="tag">Sprint · Derivate</span>
+        </div>
+      </div>
+      <div class="card">
+        <span class="status active"><span class="dot"></span>En curso</span>
+        <h3>Maratón Femenina de Matemáticas (MFP)</h3>
+        <p>Clasifiqué en el puesto 13 en la primera etapa y avanzo a la segunda, representando a la UNMSM en la sede de Campinas, Brasil.</p>
+        <div class="tagrow">
+          <span class="tag">Matemática</span>
+          <span class="tag">Competencia</span>
+          <span class="tag">Campinas, Brasil</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= METODOLOGIAS ================= -->
+<section id="metodologias" style="background:var(--surface); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Cómo enseño</p>
+      <h2>Dos materias, un mismo método: escuchar primero</h2>
+      <p>Ya sea una ecuación o una nota musical, mi punto de partida es identificar dónde está el alumno antes de decirle hacia dónde ir.</p>
+    </div>
+    <div class="card-grid">
+      <div class="method-card">
+        <h3>🎵 Canto lírico</h3>
+        <p class="sub">Escuchar antes de corregir</p>
+        <ul>
+          <li>Empiezo <b>escuchando al alumno</b> para identificar su rango, tono y colocación de la voz.</li>
+          <li>Uso un <b>piano</b> como guía y refuerzo con juegos y mnemotecnias para ampliar y afinar el oído.</li>
+          <li>Para trabajar la colocación, hago poner un lapicero en el paladar para sentir hacia dónde dirigir el aire.</li>
+          <li>Para ganar agudos, trabajo con la "voz de Mickey Mouse" como ejercicio de resonancia.</li>
+        </ul>
+      </div>
+      <div class="method-card">
+        <h3>⚛️ Física</h3>
+        <p class="sub">Interiorizar, no memorizar</p>
+        <ul>
+          <li>Reviso el material y explico <b>de dónde viene cada ecuación</b>, no solo cómo aplicarla.</li>
+          <li>Doy ejemplos y pido que el alumno proponga los suyos, para verificar que entendió el concepto.</li>
+          <li>Guío ejercicios paso a paso, luego los dejo resolver solos y finalmente <b>pido que me lo expliquen de vuelta</b>.</li>
+          <li>Apoyo las clases con videos y una <b>pizarra virtual</b> para visualizar los fenómenos.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= RECURSOS ================= -->
+<section id="recursos">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Recursos educativos</p>
+      <h2>Herramientas que uso en clase</h2>
+      <p>Simuladores y entornos que ayudan a visualizar la física en lugar de solo describirla.</p>
+    </div>
+    <div class="res-grid">
+      <div class="res-card">
+        <div class="icon">🪐</div>
+        <h3>PhET Simulations</h3>
+        <p>Mi recurso favorito para que el alumno manipule variables y vea el fenómeno en tiempo real, en vez de solo leer sobre él.</p>
+        <a href="https://phet.colorado.edu/es/" target="_blank" rel="noopener">→ phet.colorado.edu</a>
+      </div>
+      <div class="res-card">
+        <div class="icon">📐</div>
+        <h3>GeoGebra</h3>
+        <p>Para graficar funciones y visualizar conceptos físico-matemáticos junto con el alumno.</p>
+        <a href="https://www.geogebra.org/" target="_blank" rel="noopener">→ geogebra.org</a>
+      </div>
+      <div class="res-card">
+        <div class="icon">🐍</div>
+        <h3>Python / Google Colab</h3>
+        <p>Cuando el análisis lo pide, modelamos y graficamos con Python directamente en el navegador.</p>
+        <a href="https://colab.research.google.com/" target="_blank" rel="noopener">→ colab.research.google.com</a>
+      </div>
+      <div class="res-card">
+        <div class="icon">🖊️</div>
+        <h3>Pizarra virtual</h3>
+        <p>Una pantalla compartida donde desarrollo los ejercicios en vivo, para que el proceso quede visible paso a paso.</p>
+      </div>
+      <div class="res-card">
+        <div class="icon">🎬</div>
+        <h3>Videos explicativos</h3>
+        <p>Material audiovisual de apoyo para visualizar fenómenos que son difíciles de mostrar solo con la pizarra.</p>
+      </div>
+      <div class="res-card">
+        <div class="icon">🎹</div>
+        <h3>Piano</h3>
+        <p>Guía de referencia auditiva en las clases de canto lírico, para afinar oído y rango vocal.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TIC ================= -->
+<section id="tic" style="background:var(--surface); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Tecnologías</p>
+      <h2>Tecnologías en el aula</h2>
+      <p>Herramientas que combino para enseñar física y canto lírico — desde simuladores hasta apps de evaluación.</p>
+    </div>
+    <div class="tic-scroll">
+      <table class="tic">
+        <thead>
+          <tr><th>Herramienta</th><th>Categoría</th><th>Uso pedagógico</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>PhET Simulations</td><td><span class="cat">Simulador</span></td><td>Visualizar y manipular fenómenos físicos en tiempo real</td></tr>
+          <tr><td>GeoGebra</td><td><span class="cat">Matemática</span></td><td>Graficar funciones y conceptos físico-matemáticos</td></tr>
+          <tr><td>Python / Google Colab</td><td><span class="cat">Modelamiento</span></td><td>Análisis de datos y simulaciones computacionales</td></tr>
+          <tr><td>Pizarra virtual</td><td><span class="cat">Visualización</span></td><td>Desarrollar ejercicios en vivo de forma compartida</td></tr>
+          <tr><td>YouTube</td><td><span class="cat">Video</span></td><td>Material audiovisual de apoyo previo o posterior a clase</td></tr>
+          <tr><td>Piano / apps de afinación</td><td><span class="cat">Música</span></td><td>Referencia auditiva para rango y afinación vocal</td></tr>
+          <tr><td>Google Forms</td><td><span class="cat">Evaluación</span></td><td>Cuestionarios previos y seguimiento del aprendizaje</td></tr>
+          <tr><td>Kahoot</td><td><span class="cat">Evaluación</span></td><td>Diagnóstico formativo y retroalimentación inmediata</td></tr>
+          <tr><td>Moodle / Classroom</td><td><span class="cat">LMS</span></td><td>Organizar recursos, entregas y comunicación con el alumno</td></tr>
+          <tr><td>Claude / ChatGPT</td><td><span class="cat">IA educativa</span></td><td>Apoyo para generar ejemplos, variantes de ejercicios y material didáctico</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TRABAJOS ================= -->
+<section id="trabajos">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Trabajos de clase</p>
+      <h2>Producciones de la asignatura</h2>
+      <p>Los cuatro trabajos de esta asignatura. Estarán enlazados en la parte siguiente.</p>
+    </div>
+    <div class="card-grid">
+      <div class="card">
+        <span class="status done"><span class="dot"></span>PDF</span>
+        <h3>Análisis del Perfil del Docente Universitario</h3>
+        <p>Análisis crítico de los modelos del perfil docente: tradicional, por competencias y crítico-reflexivo (Freire). Se evalúa cuál perfil responde mejor a los desafíos éticos y humanistas del siglo XXI.</p>
+        <a class="link" href="trabajos/analisis-perfil-docente.pdf" target="_blank" rel="noopener">→ Ver PDF</a>
+      </div>
+      <div class="card">
+        <span class="status done"><span class="dot"></span>PDF</span>
+        <h3>Aula Invertida — Ondas y Sonido</h3>
+        <p>Diseño de una clase con el modelo Flipped Classroom sobre ondas y sonido (4°/5° secundaria). Estructura ANTES–DURANTE–DESPUÉS: video y cuestionario previos sobre frecuencia y amplitud, experimentación en aula con diapasones y botellas afinadas contrastada con el simulador PhET "Sound Waves", y evaluación creativa explicando por qué se ve el relámpago antes de escuchar el trueno.</p>
+        <a class="link" href="trabajos/aula-invertida-ondas-sonido.pdf" target="_blank" rel="noopener">→ Ver PDF</a>
+      </div>
+      <div class="card">
+        <span class="status done"><span class="dot"></span>PDF</span>
+        <h3>Crea tu caso — El misterio de la Copa Rota</h3>
+        <p>Caso de Aprendizaje Basado en Casos (ABC) sobre resonancia y frecuencia natural en una copa de cristal. Los estudiantes resuelven un problema de acústica real usando conceptos de ondas sonoras, energía y frecuencia natural — recorriendo todos los niveles de Bloom hasta diseñar su propio experimento para encontrar la frecuencia natural de un vaso o copa.</p>
+        <a class="link" href="trabajos/caso-copa-rota.pdf" target="_blank" rel="noopener">→ Ver PDF</a>
+      </div>
+      <div class="card">
+        <span class="status active"><span class="dot"></span>Publicado</span>
+        <h3>Portafolio docente</h3>
+        <p>Este mismo portafolio: sitio construido con HTML, CSS y JavaScript, y publicado con GitHub Pages.</p>
+        <a class="link" href="https://elizabethrojas20.github.io/Portafolio_Docente.github.io/" target="_blank" rel="noopener">→ Ver sitio</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACTO / FOOTER ================= -->
+<footer id="contacto">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <p class="eyebrow">Contacto</p>
+        <h2>Escribamos.</h2>
+      </div>
+      <div class="footer-meta">
+        <p><a href="mailto:elizabeth.rojasm1@unmsm.edu.pe">elizabeth.rojasm1@unmsm.edu.pe</a></p>
+        <p>Lima, Perú</p>
+      </div>
+    </div>
+    <p class="copyright">Elizabeth Grace Rojas Miranda · Física UNMSM · Portafolio construido con HTML, CSS y JavaScript.</p>
+  </div>
+</footer>
+
+<script>
+  // Menú móvil
+  const toggle = document.getElementById('navToggle');
+  const links = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => links.classList.toggle('open'));
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+
+  // Reveal on scroll
+  const cards = document.querySelectorAll('.card');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:.15});
+  cards.forEach(c => io.observe(c));
+</script>
+
+</body>
+</html>
